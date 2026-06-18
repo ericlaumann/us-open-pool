@@ -46,6 +46,10 @@
   .note{ padding:12px 22px 0; font-size:12px; color:var(--muted); line-height:1.6; }
   .loading{ padding:40px 22px; text-align:center; color:var(--muted); font-size:14px; }
   .err{ padding:18px 22px; color:var(--red); font-size:13.5px; }
+  .toggle{ display:flex; justify-content:center; padding:14px 14px 2px; }
+  .segwrap{ display:inline-flex; background:#EDE7D8; border:1px solid var(--line); border-radius:10px; padding:3px; }
+  .seg{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--navy); padding:8px 20px; border-radius:8px; }
+  .seg.active{ background:var(--navy); color:#fff; }
 </style>
 </head>
 <body>
@@ -59,6 +63,11 @@
       <button class="refresh" id="refresh">Refresh</button>
     </div>
   </header>
+
+  <nav class="toggle"><div class="segwrap">
+    <a class="seg" href="leaderboard.html">Standings</a>
+    <a class="seg active" href="board.html">Golfers</a>
+  </div></nav>
 
   <div class="legend">
     <span class="lg"><span class="chip" style="background:#0A2240">D</span>Dad</span>
