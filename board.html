@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>The Board — US Open Pool</title>
 <style>
   :root{
@@ -173,12 +176,14 @@
   }
 
   function tickUpdated(){ if(!lastUpdate) return; var s=Math.round((Date.now()-lastUpdate)/1000); document.getElementById("updated").textContent="updated "+(s<60?s+"s ago":Math.floor(s/60)+"m ago"); }
-  function load(){ fetch(URL,{cache:"no-store"}).then(function(r){return r.json();}).then(render).catch(function(){ document.getElementById("board").innerHTML='<div class="err">Couldn&rsquo;t reach live scores. Retrying in a minute…</div>'; }); }
+  function load(){ fetch(URL+"&_="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(render).catch(function(){ document.getElementById("board").innerHTML='<div class="err">Couldn&rsquo;t reach live scores. Retrying in a minute…</div>'; }); }
 
   document.getElementById("refresh").addEventListener("click",load);
   load();
   setInterval(load,60000);
   setInterval(tickUpdated,1000);
+  document.addEventListener("visibilitychange",function(){ if(!document.hidden) load(); });
+  window.addEventListener("focus",load);
 })();
 </script>
 </body>
