@@ -94,18 +94,29 @@
   function parClass(n){ if(n==null) return "even"; if(n<0) return "red"; if(n>0) return "over"; return "even"; }
   function fmtTee(iso){ try{ var d=new Date(iso); return d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}); }catch(e){ return ""; } }
 
+  function parRoundSum(c){
+    var ls=c.linescores||[], sum=0, any=false;
+    for(var i=0;i<ls.length;i++){ var n=parToNum(ls[i]&&ls[i].displayValue); if(n!=null){ sum+=n; any=true; } }
+    return any?sum:null;
+  }
   function buildMap(comp){
     var map={};
     (comp.competitors||[]).forEach(function(c){
-      var a=c.athlete||{}, s=c.status||{};
-      var dv=(c.score&&c.score.displayValue)||null;
-      var posName=(s.position&&(s.position.displayName||s.position.displayValue))||"";
+      var a=c.athlete||{}, s=c.status||{}, pos=s.position||{};
+      var posName=pos.displayName||pos.displayValue||"";
+      var state=(s.type&&s.type.state)||"";
       var typeDetail=(s.type&&(s.type.detail||s.type.description))||"";
       var cut=/CUT|WD|DQ|MDF/i.test(posName)||/cut|withdraw|disqual/i.test(typeDetail);
+      var thru=s.thru||0;
+      var overall=parRoundSum(c);
+      var started=state==="in"||state==="post"||overall!=null||thru>0;
       map[norm(a.displayName)]={
-        name:a.displayName, toPar:parToNum(dv), thru:s.thru, period:s.period,
-        pos:(s.position&&s.position.displayValue)||"", tee:s.teeTime||"", started:!(dv==null||dv==="-"||dv===""),
-        cut:cut, today:(s.today!=null?s.today:null)
+        name:a.displayName,
+        toPar:started?(overall==null?0:overall):null,
+        thru:thru, period:s.period,
+        pos:(posName&&posName!=="-")?posName:"",
+        tee:s.teeTime||"",
+        started:started, cut:cut
       };
     });
     return map;
