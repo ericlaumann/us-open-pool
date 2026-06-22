@@ -70,6 +70,7 @@
   <nav class="toggle"><div class="segwrap">
     <a class="seg" href="leaderboard.html">Standings</a>
     <a class="seg active" href="board.html">Golfers</a>
+    <a class="seg" href="final.html">Final</a>
   </div></nav>
 
   <div class="legend">
@@ -94,7 +95,7 @@
   };
   var OWNER_ORDER=["Dad","Mark","JJ","E-Man"];
   var OWNER_META={ "Dad":{c:"#0A2240",i:"D"}, "Mark":{c:"#2E6B45",i:"M"}, "JJ":{c:"#8E2B34",i:"J"}, "E-Man":{c:"#8A6A2E",i:"E"} };
-  var URL="https://site.api.espn.com/apis/site/v2/sports/golf/leaderboard?dates=20260618-20260621";
+  var URL="https://site.api.espn.com/apis/site/v2/sports/golf/leaderboard?dates=20260621";
   var norm=function(s){return (s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[.\-']/g,"").replace(/\s+/g," ").trim();};
   var lastUpdate=null;
 

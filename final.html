@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>The Money — US Open Pool Final</title>
+<style>
+  :root{
+    --navy:#0A2240; --gold:#B68A3E; --gold-soft:#C9A24B; --gold-bg:#FBF3DF;
+    --cream:#F5F2EA; --card:#FFFFFF; --ink:#15202E; --muted:#5C6672;
+    --line:#E6E0D2; --green:#1E5135;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;}
+  body{ background:var(--cream); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.45; padding-bottom:40px; }
+  .wrap{max-width:600px; margin:0 auto;}
+  .hero{ background:var(--navy); color:#fff; padding:26px 22px 22px; border-bottom:3px solid var(--gold); text-align:center; }
+  .kicker{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-soft); font-weight:600; }
+  .hero h1{ font-family:Georgia,"Times New Roman",serif; font-weight:400; font-size:32px; margin:8px 0 0; }
+  .hero .sub{ margin-top:10px; font-size:13.5px; color:#C9D3E0; }
+  .toggle{ display:flex; justify-content:center; padding:14px 14px 2px; }
+  .segwrap{ display:inline-flex; background:#EDE7D8; border:1px solid var(--line); border-radius:10px; padding:3px; }
+  .seg{ text-decoration:none; font-size:13.5px; font-weight:600; color:var(--navy); padding:8px 16px; border-radius:8px; }
+  .seg.active{ background:var(--navy); color:#fff; }
+  .champ{ margin:16px 14px 4px; background:var(--gold-bg); border:1px solid var(--gold); border-radius:16px; padding:20px; text-align:center; }
+  .champ .trophy{ width:38px; height:38px; color:var(--gold); }
+  .champ .lab{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#8A6A2E; font-weight:700; margin-top:6px; }
+  .champ .who{ font-family:Georgia,serif; font-size:30px; color:var(--navy); margin:2px 0 4px; }
+  .champ .amt{ font-size:22px; font-weight:700; color:var(--green); font-variant-numeric:tabular-nums; }
+  .champ .note{ font-size:12.5px; color:#7A6A48; margin-top:8px; }
+  .board{ padding:14px; }
+  .pcard{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px 8px; margin-bottom:12px; }
+  .pcard.win{ border-color:var(--gold); border-top:3px solid var(--gold); }
+  .phead{ display:flex; align-items:center; gap:12px; }
+  .rankbadge{ flex:0 0 auto; width:32px; height:32px; border-radius:50%; background:var(--navy); color:#fff; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  .win .rankbadge{ background:var(--gold); color:var(--navy); }
+  .pname{ font-size:18px; font-weight:600; }
+  .ptot{ margin-left:auto; text-align:right; }
+  .ptot .num{ font-size:20px; font-weight:700; color:var(--green); font-variant-numeric:tabular-nums; line-height:1; }
+  .ptot .lab{ font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); }
+  .glist{ margin-top:12px; border-top:1px solid var(--line); }
+  .grow{ display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #F0EBDD; }
+  .grow:last-child{ border-bottom:none; }
+  .gname{ font-size:14.5px; }
+  .gpos{ font-size:11.5px; color:var(--muted); margin-top:1px; }
+  .gmoney{ margin-left:auto; font-size:14.5px; font-weight:600; font-variant-numeric:tabular-nums; }
+  .champtag{ font-size:9.5px; letter-spacing:.06em; color:#8A6A2E; background:var(--gold-bg); border:1px solid var(--gold); border-radius:4px; padding:1px 5px; margin-left:7px; text-transform:uppercase; vertical-align:1px; }
+  .mc{ color:var(--muted); }
+  .note{ padding:8px 22px 0; font-size:12px; color:var(--muted); line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">U.S. Open Pool · Final</div>
+    <h1>The Money</h1>
+    <div class="sub">Shinnecock Hills · Wyndham Clark, champion (&minus;4)</div>
+  </header>
+
+  <nav class="toggle"><div class="segwrap">
+    <a class="seg" href="leaderboard.html">Standings</a>
+    <a class="seg" href="board.html">Golfers</a>
+    <a class="seg active" href="final.html">Final</a>
+  </div></nav>
+
+  <div id="champ"></div>
+  <div id="board" class="board"></div>
+
+  <p class="note">Scored by total prize money earned across each player&rsquo;s four golfers, from the record $22.5M purse. Tied finishes split evenly; missed cut pays $10,000. Final and official.</p>
+</div>
+
+<script>
+(function(){
+  var PICKS={
+    "Dad":["Scottie Scheffler","Cameron Young","Wyndham Clark","Robert MacIntyre"],
+    "Mark":["Rory McIlroy","Tommy Fleetwood","Viktor Hovland","Robert MacIntyre"],
+    "JJ":["Scottie Scheffler","Cameron Young","Sam Burns","Cameron Smith"],
+    "E-Man":["Scottie Scheffler","Ludvig Åberg","Sam Burns","Kurt Kitayama"]
+  };
+  var RESULTS={
+    "Wyndham Clark":{pos:"1st", money:4500000, champ:true},
+    "Sam Burns":{pos:"2nd", money:2430000},
+    "Scottie Scheffler":{pos:"T4", money:920882},
+    "Tommy Fleetwood":{pos:"T11", money:405862},
+    "Ludvig Åberg":{pos:"T17", money:280966},
+    "Rory McIlroy":{pos:"T32", money:128756},
+    "Robert MacIntyre":{pos:"T39", money:101859},
+    "Cameron Young":{pos:"T43", money:72592},
+    "Kurt Kitayama":{pos:"T53", money:51467},
+    "Viktor Hovland":{pos:"Missed cut", money:10000, mc:true},
+    "Cameron Smith":{pos:"Missed cut", money:10000, mc:true}
+  };
+  var usd=function(n){ return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n); };
+
+  var players=Object.keys(PICKS).map(function(name){
+    var golfers=PICKS[name].map(function(g){ var r=RESULTS[g]||{pos:"—",money:0}; return {name:g, pos:r.pos, money:r.money, champ:r.champ, mc:r.mc}; });
+    golfers.sort(function(a,b){ return b.money-a.money; });
+    var total=golfers.reduce(function(s,g){ return s+g.money; },0);
+    return {name:name, golfers:golfers, total:total};
+  });
+  players.sort(function(a,b){ return b.total-a.total; });
+
+  var champ=players[0];
+  document.getElementById("champ").innerHTML=
+    '<div class="champ">'+
+      '<svg class="trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>'+
+      '<div class="lab">Pool Champion</div>'+
+      '<div class="who">'+champ.name+'</div>'+
+      '<div class="amt">'+usd(champ.total)+'</div>'+
+      '<div class="note">Wyndham Clark&rsquo;s $4.5M winner&rsquo;s check sealed it.</div>'+
+    '</div>';
+
+  document.getElementById("board").innerHTML=players.map(function(p,i){
+    var grows=p.golfers.map(function(g){
+      return '<div class="grow">'+
+        '<div><div class="gname'+(g.mc?' mc':'')+'">'+g.name+(g.champ?'<span class="champtag">Champion</span>':'')+'</div>'+
+        '<div class="gpos">'+g.pos+'</div></div>'+
+        '<div class="gmoney'+(g.mc?' mc':'')+'">'+usd(g.money)+'</div></div>';
+    }).join("");
+    return '<div class="pcard'+(i===0?' win':'')+'">'+
+      '<div class="phead">'+
+        '<div class="rankbadge">'+(i+1)+'</div>'+
+        '<div class="pname">'+p.name+'</div>'+
+        '<div class="ptot"><div class="num">'+usd(p.total)+'</div><div class="lab">total winnings</div></div>'+
+      '</div>'+
+      '<div class="glist">'+grows+'</div>'+
+    '</div>';
+  }).join("");
+})();
+</script>
+</body>
+</html>
